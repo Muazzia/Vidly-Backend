@@ -1,4 +1,5 @@
 const dotenv = require('dotenv')
+require('express-async-errors');
 const express = require('express');
 const mongoose = require('mongoose');
 
@@ -28,7 +29,13 @@ app.use('/api/rentals', rentals);
 app.use('/api/users', users);
 app.use('/api/auth', auth);
 
+app.use((err, req, res, next) => {
+    console.log(err);
+    return res.status(500).send('Something went bad');
+})
+
 
 const port = process.env.POST || 3000;
 const server = app.listen(port, () => console.log(`listening to port ${port}`))
-module.exports = server;
+module.exports.server = server;
+module.exports.app = app;
