@@ -30,4 +30,5 @@ app.use('/api/auth', auth);
 
 
 const port = process.env.POST || 3000;
-app.listen(port, () => console.log(`listening to port ${port}`))
+const server = app.listen(port, () => console.log(`listening to port ${port}`))
+module.exports = server;
