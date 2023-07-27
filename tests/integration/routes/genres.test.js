@@ -8,6 +8,7 @@ let app;
 describe('/api/genres', () => {
     beforeEach(() => { ({ app: app, server: server } = require('../../../index')) });
     afterEach(async () => { server.close(), await Genere.deleteMany({}), await mongoose.connection.close(); })
+
     describe('Get /', () => {
         it('should return all genres', async () => {
             await Genere.collection.insertMany([
@@ -18,5 +19,9 @@ describe('/api/genres', () => {
             expect(res.body.length).toBe(2);
             expect(res.body.some(g => g.name === 'genre1')).toBeTruthy();
         })
+    })
+
+    describe('Get /:id', () => {
+
     })
 })

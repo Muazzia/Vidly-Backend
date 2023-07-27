@@ -30,7 +30,7 @@ router.get('/:id', async (req, res) => {
         res.send(genre);
 
     } catch (err) {
-        res.status(500).send('Internal Server Error'); n
+        res.status(500).send('Internal Server Error');
     }
 
 })
