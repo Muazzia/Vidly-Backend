@@ -1,7 +1,9 @@
-require('dotenv').config()
+const dotenv = require('dotenv')
 const express = require('express');
 const mongoose = require('mongoose');
 
+const environment = process.env.NODE_ENV || 'development';
+dotenv.config({ path: `.env.${environment}` });
 
 const genres = require('./routes/genres');
 const customers = require('./routes/customers');
@@ -13,9 +15,8 @@ const auth = require('./routes/auth');
 
 const app = express();
 
-
-mongoose.connect('mongodb://127.0.0.1:27017/vidly')
-    .then(() => console.log('Connected'))
+mongoose.connect(process.env.db)
+    .then(() => console.log(`Connected to ${process.env.db}`))
     .catch((err) => console.error(err))
 
 

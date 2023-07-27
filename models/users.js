@@ -2,6 +2,7 @@ const Joi = require('joi');
 const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
 
+
 const schema = new mongoose.Schema({
     name: { type: String, trim: true, required: true, minlength: 3, maxlength: 255 },
     email: { type: String, time: true, required: true, maxlength: 255, unique: true },
