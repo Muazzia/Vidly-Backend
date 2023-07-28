@@ -3,6 +3,7 @@ require('express-async-errors');
 const express = require('express');
 const mongoose = require('mongoose');
 
+
 const environment = process.env.NODE_ENV || 'development';
 dotenv.config({ path: `.env.${environment}` });
 
@@ -12,7 +13,7 @@ const movies = require('./routes/movies');
 const rentals = require('./routes/rental');
 const users = require('./routes/users');
 const auth = require('./routes/auth');
-
+const returns = require('./routes/returns');
 
 const app = express();
 
@@ -28,6 +29,7 @@ app.use('/api/movies', movies);
 app.use('/api/rentals', rentals);
 app.use('/api/users', users);
 app.use('/api/auth', auth);
+app.use('/api/returns', returns);
 
 app.use((err, req, res, next) => {
     console.log(err);
@@ -37,5 +39,4 @@ app.use((err, req, res, next) => {
 
 const port = process.env.POST || 3000;
 const server = app.listen(port, () => console.log(`listening to port ${port}`))
-module.exports.server = server;
-module.exports.app = app;
+module.exports = server;
