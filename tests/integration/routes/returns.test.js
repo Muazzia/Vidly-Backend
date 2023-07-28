@@ -43,5 +43,14 @@ describe('api/returns', () => {
             const res = await request(server).post('/api/returns').set('x-auth-tokken', tokken).send({ customerId });
             expect(res.status).toBe(400)
         })
+
+        it('should return 404 if no object found', async () => {
+            const tokken = new User().getAuthToken();
+            const res = await request(server).post('/api/returns').set('x-auth-tokken', tokken).send({ movieId, customerId });
+
+            const r = await Rental.findById(rental._id);
+            expect(r).not.toBeNull();
+            expect(r._id).toEqual(rental._id);
+        })
     })
 })
