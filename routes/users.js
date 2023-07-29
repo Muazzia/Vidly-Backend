@@ -34,10 +34,10 @@ router.post('/', async (req, res) => {
 
         const token = user.getAuthToken();
 
-        res.header('x-auth-tokken', token).send(_.pick(user, ['_id', 'name', 'email']));
+        return res.header('x-auth-tokken', token).send(_.pick(user, ['_id', 'name', 'email']));
     } catch (err) {
         console.log(err);
-        res.status(500).send('Internal Server error');
+        res.status(500).send('Internal Server error', JSON.stringify(err));
     }
 
 })
