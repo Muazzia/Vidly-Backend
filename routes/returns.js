@@ -56,8 +56,9 @@ const dateDiff = (startDate, endDate) => {
 
     const oneDayInMilliseconds = 24 * 60 * 60 * 1000;
     const timeDifferenceInMilliseconds = endDate - startDate;
+    const val = Math.round(timeDifferenceInMilliseconds / oneDayInMilliseconds)
 
-    return Math.round(timeDifferenceInMilliseconds / oneDayInMilliseconds);
+    return val === 0 ? 1 : val;
 }
 
 
