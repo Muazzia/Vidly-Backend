@@ -37,10 +37,10 @@ app.use('/api/users', users);
 app.use('/api/auth', auth);
 app.use('/api/returns', returns);
 
-app.use((err, req, res, next) => {
-    console.log(err);
-    return res.status(500).send('Something went bad');
-})
+// app.use((err, req, res, next) => {
+//     console.log(err);
+//     return res.status(500).send('Something went bad');
+// })
 
 
 const port = process.env.PORT || 3000;
