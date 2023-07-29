@@ -86,7 +86,6 @@ describe('api/returns', () => {
 
         })
 
-
         it('should return valid rental fee if input is valid', async () => {
             const days = -7;
             rental.dateOut = new moment().add(days, 'days').toDate();

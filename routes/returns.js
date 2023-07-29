@@ -3,16 +3,15 @@ const express = require('express');
 const { Rental } = require('../models/rental');
 const moment = require('moment');
 const { Movie } = require('../models/movies');
+const auth = require('../middlewares/auth');
 
 const router = express.Router();
 
 
 
-router.post('/', async (req, res) => {
+router.post('/', auth, async (req, res) => {
     if (!req.body.customerId) return res.status(400).send('customer ID  Not Found');
     if (!req.body.movieId) return res.status(400).send('movie Id  Not Found');
-
-    if (!req.header('x-auth-tokken')) return res.status(401).send('Unotharized');
 
     const rental = await Rental.findOne({
         'customer._id': req.body.customerId,
