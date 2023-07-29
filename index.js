@@ -14,7 +14,6 @@ const rentals = require('./routes/rental');
 const users = require('./routes/users');
 const auth = require('./routes/auth');
 const returns = require('./routes/returns');
-const prod = require('./middlewares/prod');
 
 const app = express();
 
@@ -23,7 +22,12 @@ mongoose.connect(process.env.db)
     .catch((err) => console.error(err))
 
 
-prod(app)
+
+
+require('./middlewares/prod')(app);
+
+
+
 app.use(express.json());
 app.use('/api/genres', genres);
 app.use('/api/customers', customers);
