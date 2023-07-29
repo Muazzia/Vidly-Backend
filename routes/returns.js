@@ -4,14 +4,15 @@ const { Rental } = require('../models/rental');
 const moment = require('moment');
 const { Movie } = require('../models/movies');
 const auth = require('../middlewares/auth');
+const Joi = require('joi');
 
 const router = express.Router();
 
 
 
 router.post('/', auth, async (req, res) => {
-    if (!req.body.customerId) return res.status(400).send('customer ID  Not Found');
-    if (!req.body.movieId) return res.status(400).send('movie Id  Not Found');
+    const { error } = validate(req.body);
+    if (error) return res.status(400).send(error.message);
 
     const rental = await Rental.findOne({
         'customer._id': req.body.customerId,
@@ -33,6 +34,22 @@ router.post('/', auth, async (req, res) => {
     res.send(rental);
 
 })
+
+const validate = (r) => {
+    const objectId = Joi.string().custom((value, helpers) => {
+        if (!mongoose.Types.ObjectId.isValid(value)) {
+            return helpers.error('any.invalid');
+        }
+        return value;
+    }, 'Object ID Validation');
+
+    const schema = Joi.object({
+        customerId: objectId.required().min(3).max(255),
+        movieId: objectId.required().min(3).max(255)
+    })
+
+    return schema.validate(r);
+}
 
 
 const dateDiff = (startDate, endDate) => {
