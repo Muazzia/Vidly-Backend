@@ -4,8 +4,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 
 
-// const environment = process.env.NODE_ENV || 'development';
-// dotenv.config({ path: `.env.${environment}` });
+const environment = process.env.NODE_ENV || 'development';
+dotenv.config({ path: `.env.${environment}` });
 
 const genres = require('./routes/genres');
 const customers = require('./routes/customers');
