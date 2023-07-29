@@ -4,8 +4,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 
 
-const environment = process.env.NODE_ENV || 'development';
-dotenv.config({ path: `.env.${environment}` });
+// const environment = process.env.NODE_ENV || 'development';
+// dotenv.config({ path: `.env.${environment}` });
 
 const genres = require('./routes/genres');
 const customers = require('./routes/customers');
@@ -43,6 +43,6 @@ app.use((err, req, res, next) => {
 })
 
 
-const port = process.env.POST || 3000;
+const port = process.env.PORT || 3000;
 const server = app.listen(port, () => console.log(`listening to port ${port}`))
 module.exports = server;
